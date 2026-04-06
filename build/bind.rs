@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::{env, path::PathBuf};
 
 use crate::wrap::enums::get_blocked_enum_names;
 
@@ -12,6 +12,12 @@ pub fn compile_raylib(raylib_path: &str) {
 
     if cfg!(feature = "dylib") {
         cmake_config.define("BUILD_SHARED_LIBS", "ON");
+    }
+
+    let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap_or_default();
+
+    if target_os == "emscripten" {
+        cmake_config.define("PLATFORM", "Web");
     }
 
     // Set the correct build profile
@@ -74,8 +80,7 @@ pub fn link_libs() {
     // Link raylib itself
     if cfg!(feature = "dylib") {
         println!("cargo:rustc-link-lib=dylib=raylib");
-    }
-    else {
+    } else {
         println!("cargo:rustc-link-lib=static=raylib");
     }
 }
@@ -93,6 +98,12 @@ pub fn generate_bindings(header_file: &str) {
         .blocklist_item("__bool_true_false_are_defined")
         .blocklist_item("false_")
         .blocklist_item("true_");
+
+    let target_os = env::var("CARGO_CFG_TARGET_OS").unwrap_or_default();
+
+    if target_os == "emscripten" {
+        builder = builder.clang_arg("-fvisibility=default");
+    }
 
     // Deny all blocked enums
     for enum_name in get_blocked_enum_names() {
