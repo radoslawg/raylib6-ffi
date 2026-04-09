@@ -2,3 +2,5 @@
 
 // Load raylib
 #include "../third_party/raylib/src/raylib.h"
+#include "../third_party/raylib/src/rlgl.h"
+#include "../third_party/raylib/src/raymath.h"
