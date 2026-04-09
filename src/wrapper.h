@@ -3,4 +3,8 @@
 // Load raylib
 #include "../third_party/raylib/src/raylib.h"
 #include "../third_party/raylib/src/rlgl.h"
+
+#include "math.h"
+#define inline
 #include "../third_party/raylib/src/raymath.h"
+#undef inline
