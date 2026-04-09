@@ -90,7 +90,13 @@ pub fn generate_bindings(header_file: &str) {
     // Construct a builder for generating bindings
     let mut builder = bindgen::Builder::default()
         .header(header_file)
+        .generate_inline_functions(true)
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
+        .blocklist_item("FP_NAN")
+        .blocklist_item("FP_INFINITE")
+        .blocklist_item("FP_ZERO")
+        .blocklist_item("FP_SUBNORMAL")
+        .blocklist_item("FP_NORMAL")
         .blocklist_item("DEG2RAD")
         .blocklist_item("PI")
         .blocklist_item("RAD2DEG")
