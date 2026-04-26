@@ -1,9 +1,9 @@
 [package]
 name = "raylib-ffi"
-version = "5.5.0"
-authors = ["Evan Pratten <ewpratten@gmail.com>"]
-edition = "2021"
-description = "Automatic raw Rust bindings to raylib"
+version = "6.0.0"
+authors = ["Evan Pratten <ewpratten@gmail.com>", "Radosław Grzanka <radoslawg@gmail.com>"]
+edition = "2024"
+description = "Automatic raw Rust bindings to raylib 6"
 documentation = "https://docs.rs/raylib-ffi"
 readme = "README.md"
 homepage = "https://github.com/ewpratten/raylib-ffi"
